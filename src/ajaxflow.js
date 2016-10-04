@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2016 Ryan Whitman (https://www.ryanwhitman.com)
  * @license https://opensource.org/licenses/MIT MIT
  * @version 1.0.0
- * @link https://github.com/RyanWhitman/ajaxflow
+ * @see https://github.com/RyanWhitman/ajaxflow
  * @since 1.0.0
  */
 
