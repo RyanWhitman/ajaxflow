@@ -2,13 +2,15 @@
  * ajaxFlow is a jQuery plugin that limits HTTP requests. It waits for a response from the server before sending an additional request. It is especially useful for search inputs and other text inputs in which an AJAX call is made for each user keystroke.
  *
  * @package ajaxFlow
- * @copyright Copyright (c) 2016 Ryan Whitman (https://www.ryanwhitman.com)
+ * @copyright Copyright (c) 2017 Ryan Whitman (https://www.ryanwhitman.com)
  * @license https://opensource.org/licenses/MIT MIT
- * @version 1.0.0
+ * @version 1.1.0
  * @see https://github.com/RyanWhitman/ajaxflow
- * @since 1.0.0
  */
 
+/**
+ * The AjaxFlow class.
+ */
 var AjaxFlow = function(selector, settings, input_types) {
 
 	var
@@ -27,7 +29,7 @@ var AjaxFlow = function(selector, settings, input_types) {
 				is_holding = false,
 				pending_data;
 
-			this.request = function(data) {
+			this.request = function(request_data) {
 
 				var instance = this;
 
@@ -38,9 +40,9 @@ var AjaxFlow = function(selector, settings, input_types) {
 
 					jQuery.ajax(the_settings.url, {
 						method: the_settings.method,
-						data: data,
+						data: request_data,
 						complete: function(jqXHR, textStatus) {
-							the_settings.callback(jqXHR, textStatus);
+							the_settings.callback(jqXHR, textStatus, request_data);
 							is_holding = false;
 
 							if (pending_data)
@@ -48,7 +50,7 @@ var AjaxFlow = function(selector, settings, input_types) {
 						}
 					});
 				} else
-					pending_data = data;
+					pending_data = request_data;
 			}
 
 			this.input = function(val) {
